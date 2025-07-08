@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block titulo_pagina %}
-    <h2>Exercício-1</h2>
+    <h2>Exercício-3</h2>
 {% endblock %}  
 
 {% block conteudo %}
@@ -10,9 +10,9 @@
         <!-- CABECALHO DA TABELA HTML -->
         <thead>
             <tr>
-                <th>Departamento</th>
-                <th>Nome</th>
-                <th>Telefones</th>
+                <th>Estado</th>
+                <th>Cidade</th>
+                <th>Bairro</th>
             </tr>
         </thead>
         <!-- LINHAS DA TABELA HTML CONTENDO OS REGISTROS -->
@@ -22,7 +22,7 @@
             <tr>
                 <td>{{ reg.0 }}</td>
                 <td>{{ reg.1 }}</td>
-                <td>{{ reg.2|default_if_none:'' }}</td>
+                <td>{{ reg.2 }}</td>
             </tr>
             {% endfor %}
         </tbody>

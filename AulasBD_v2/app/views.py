@@ -68,11 +68,10 @@ def exercicio_2(request):
 
         sql = '''
             SELECT tur.nome as 'Turma',
-            alu.nome,
-            alu.idade
+                alu.nome,
+                alu.idade
 
-            FROM Aluno alu
-            INNER JOIN Aluno tur ON tur.id = alu.turma_id
+            FROM Alunos alu INNER JOIN Turma tur ON tur.id = alu.turma_id
 
             ORDER BY tur.nome, alu.nome
         '''
@@ -81,7 +80,68 @@ def exercicio_2(request):
 
         registros = cursor.fetchall()
 
-        print(registros)
+        return render(request, template, context={'registros': registros})
+    
+    except Exception as err:
+        return render(request, template, context={'ERRO': err})
+    
+
+def exercicio_3(request):
+    template = 'exercicio_3.html'
+
+    try:
+        conn = obter_conexao()
+
+        cursor = conn.cursor()
+
+        sql = '''
+            SELECT est.nome AS 'Estado',
+                cid.nome AS 'Cidade',
+                bai.nome AS 'Bairro'
+
+            FROM Cidade cid INNER JOIN Estado AS est ON cid.estado_id = est.sigla
+                INNER JOIN Bairro AS bai ON bai.cidade_id = cid.id
+
+            ORDER BY est.nome, cid.nome, bai.nome
+        '''
+
+        cursor.execute(sql)
+
+        registros = cursor.fetchall()
+
+        return render(request, template, context={'registros': registros})
+    
+    except Exception as err:
+        return render(request, template, context={'ERRO': err})
+    
+
+
+def exercicio_4(request):
+    template = 'exercicio_4.html'
+
+    try:
+        conn = obter_conexao()
+
+        cursor = conn.cursor()
+
+        sql = '''
+            SELECT fab.descricao AS 'Fabricante',
+                mode.descricao AS 'Modelo',
+                car.ano_fabricacao AS 'Ano_de_Fabricacao',
+                car.cor AS 'Cor',
+                car.placa AS 'Placa',
+                car.preco AS 'Preco',
+                cat.descricao AS 'Categoria'
+
+            FROM Carro car INNER JOIN Modelo AS mode ON car.modelo_id = mode.id
+                INNER JOIN Fabricante AS fab ON mode.fabricante_id = fab.id
+                INNER JOIN Categoria AS cat ON car.categoria_id = cat.id
+            ORDER BY fab.descricao, mode.descricao, car.ano_fabricacao
+        '''
+
+        cursor.execute(sql)
+
+        registros = cursor.fetchall()
 
         return render(request, template, context={'registros': registros})
     
