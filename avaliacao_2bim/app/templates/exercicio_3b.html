@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block titulo_pagina %}
+    <h2>Exercício-3B</h2>
+{% endblock %}  
+
+{% block conteudo %}
+    <!-- TABELA HTML COM OS REGISTROS -->
+    <table>
+        <!-- CABECALHO DA TABELA HTML -->
+        <thead>
+            <tr>
+                <th>Data da Venda</th>
+                <th>Valor Total da Venda</th>
+                <th>Produto</th>
+                <th>Nome do Cliente</th>
+                <th>Nome do Vendedor</th>
+            </tr>
+        </thead>
+        <!-- LINHAS DA TABELA HTML CONTENDO OS REGISTROS -->
+        <tbody>
+            <!-- LOOP PARA PEGAR CADA REGISTRO -->
+            {% for reg in registros %}
+            <tr>
+                <td>{{ reg.data_venda }}</td>
+                <td>{{ reg.valor_total }}</td>
+                <td>{{ reg.produto }}</td>
+                <td>{{ reg.nome_do_cliente }}</td>
+                <td>{{ reg.nome_do_vendedor }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+

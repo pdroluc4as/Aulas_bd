@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block titulo_pagina %}
+    <h2>Exercício-3A</h2>
+{% endblock %}  
+
+{% block conteudo %}
+    <!-- TABELA HTML COM OS REGISTROS -->
+    <table>
+        <!-- CABECALHO DA TABELA HTML -->
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descriçao</th>
+                <th>Valor Unitário</th>
+                <th>Categoria</th>
+            </tr>
+        </thead>
+        <!-- LINHAS DA TABELA HTML CONTENDO OS REGISTROS -->
+        <tbody>
+            <!-- LOOP PARA PEGAR CADA REGISTRO -->
+            {% for reg in registros %}
+            <tr>
+                <td>{{ reg.id }}</td>
+                <td>{{ reg.descricao }}</td>
+                <td>{{ reg.valor_unitario }}</td>
+                <td>{{ reg.categoria }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+
