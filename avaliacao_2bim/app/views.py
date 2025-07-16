@@ -6,7 +6,8 @@ import pyodbc
 def obter_conexao():
     # define os parametros de conexao
     driver   = '{ODBC Driver 17 for SQL Server}'
-    servidor = 'CNAT391789\SQLEXPRESS'
+    #servidor = 'CNAT391789\SQLEXPRESS'
+    servidor = 'pc-de-casa'
     banco    = 'avaliacao_2bim'
     usuario  = 'sa'
     senha    = '12345' # poder ser também: "senha", "senha@123", "Senha@123"
@@ -71,7 +72,7 @@ def exercicio_3b(request):
 
                 FROM Venda ven INNER JOIN Produto prod ON ven.produto_id = prod.id
 	            INNER JOIN Cliente cli ON ven.cliente_id = cli.id
-	            INNER JOIN Vendedor vend ON ven.vendedor_id = ven.id
+	            INNER JOIN Vendedor vend ON ven.vendedor_id = vend.id
 
                 ORDER BY ven.data_venda DESC
         '''

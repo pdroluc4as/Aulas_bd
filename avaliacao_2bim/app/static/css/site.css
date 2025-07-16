@@ -20,7 +20,7 @@ body {
     color: #0b467c;
     
     /* imagem de fundo */
-    background-image: url(../imagens/barra-lateral.png);
+    background-image: url(../images/barra-lateral.png);
     background-repeat: repeat-y;
 }
 
@@ -210,4 +210,38 @@ nav ul a:hover {
 
     /* cor da fonte */
     color: white;
+}
+
+/*#imagem {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+
+    img {
+        
+        border-radius: 50%;
+    }
+}*/
+
+#aluno {
+    
+    border-radius: 15px;
+    width: 350px;
+    height: 400px;
+    place-items: center;
+    margin-top: 1em;
+    align-content: center;
+    background-color: #5380fd;
+}
+#aluno div h3 {
+    color: white;
+}
+
+#imagem img {
+    border-radius: 50%;
+    border: 1px solid white;
+    width: 270px;
+    height: 270px;
+    object-fit: cover;
 }
