@@ -21,6 +21,8 @@ from app import (
     views_app, 
     views_departamentos, 
     views_funcionarios,
+    views_turma,
+    views_aluno,
 )
 
 urlpatterns = [
@@ -46,4 +48,16 @@ urlpatterns = [
     path('funcionarios/', views_funcionarios.VIEW_CRUD.listar, name='funcionarios_listar'),
     path('funcionarios/<str:acao>/<int:id>', views_funcionarios.VIEW_CRUD.editar, name='funcionarios_editar'),
     path('funcionarios/salvar/', views_funcionarios.VIEW_CRUD.salvar, name='funcionarios_salvar'),
+
+    # ===========================================================================
+    # Rotas: TURMAS
+    path('turmas/', views_turma.VIEW_CRUD.listar, name='turmas_listar'),
+    path('turmas/<str:acao>/<int:id>', views_turma.VIEW_CRUD.editar, name='turmas_editar'),
+    path('turmas/salvar/', views_turma.VIEW_CRUD.salvar, name='turmas_salvar'),
+
+    # ===========================================================================
+    # Rotas: ALUNO
+    path('alunos/', views_aluno.VIEW_CRUD.listar, name='alunos_listar'),
+    path('alunos/<str:acao>/<int:id>', views_aluno.VIEW_CRUD.editar, name='alunos_editar'),
+    path('alunos/salvar/', views_aluno.VIEW_CRUD.salvar, name='alunos_salvar'),
 ] 

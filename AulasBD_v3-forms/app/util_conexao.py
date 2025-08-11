@@ -4,7 +4,7 @@ def obter_conexao():
     # define os parametros de conexao
     driver   = '{ODBC Driver 17 for SQL Server}'
     servidor = '.\SQLEXPRESS'
-    banco    = 'xarobi'
+    banco    = '20231011110035'
     usuario  = 'sa'
     senha    = 'Senha@123' # poder ser também: "senha", "senha@123", "Senha@123"
 

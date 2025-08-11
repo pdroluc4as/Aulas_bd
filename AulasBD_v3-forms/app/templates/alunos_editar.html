@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block titulo_pagina %}
+    <h2 class="titulo_pagina">Alunos - {{ acao }}</h2>
+{% endblock %}
+
+{% block conteudo %}
+
+{# ================================================================= #}
+{# SE A AÇÃO FOR DE EXCLUSÃO, MOSTRA APENAS UMA CONFIRMAÇÃO          #}
+{# ================================================================= #}
+{% if acao == 'Exclusão' %}
+    <p>Deseja realmente excluir este registro?</p>
+    <br>
+    
+    {# ATENÇÃO: Usamos reg.1 para o nome e reg.0 para o ID, pois são as posições na sua consulta SQL #}
+    <p>
+        Nome: <strong>{{ reg.1 }}</strong>
+    </p>
+    <br>
+    <form action="{% url 'alunos_salvar' %}" method="post">
+        {% csrf_token %}
+        <input id="acao" name="acao" type="hidden" value="{{ acao }}">
+        
+        <input type="hidden" id="id" name="id" value="{{reg.0}}">
+
+        <input class="btn-del" type="submit" value="Excluir">
+        
+        <a class="btn-def" href="{% url 'alunos_listar' %}">Cancelar</a>
+
+    </form>
+    
+{# ================================================================= #}
+{# SE A AÇÃO FOR INCLUSÃO OU ALTERAÇÃO, MOSTRA O FORMULÁRIO COMPLETO #}
+{# ================================================================= #}
+{% else %}
+    <form action="{% url 'alunos_salvar' %}" method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+        
+        <input id="acao" name="acao" type="hidden" value="{{ acao }}">
+
+        <label for=""></label>
+        <button class="btn" type="submit">Salvar</button>
+        &nbsp;
+        <a class="btn-def" href="{% url 'alunos_listar' %}">Cancelar</a>        
+
+    </form>
+{% endif%}
+
+{% endblock %}
