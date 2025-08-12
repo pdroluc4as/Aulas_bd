@@ -7,31 +7,37 @@
 {% block conteudo %}
 
 {# ================================================================= #}
-{# SE A AÇÃO FOR DE EXCLUSÃO, MOSTRA APENAS UMA CONFIRMAÇÃO          #}
+{# SE A AÇÃO FOR DE EXCLUSÃO, MOSTRA OS DADOS COMPLETOS PARA CONFIRMAR #}
 {# ================================================================= #}
 {% if acao == 'Exclusão' %}
-    <p>Deseja realmente excluir este registro?</p>
+    <p>Deseja realmente excluir o registro abaixo?</p>
     <br>
     
-    {# ATENÇÃO: Usamos reg.1 para o nome e reg.0 para o ID, pois são as posições na sua consulta SQL #}
-    <p>
-        Nome: <strong>{{ reg.1 }}</strong>
-    </p>
+    {# ================================================================ #}
+    {# CORREÇÃO: Exibindo todos os dados do aluno antes de excluir.     #}
+    {# Lembre-se que acessamos por índice: reg.0=id, reg.1=nome, etc.  #}
+    {# ================================================================ #}
+    <div class="record-details">
+        <p><strong>ID:</strong> {{ reg.0 }}</p>
+        <p><strong>Nome:</strong> {{ reg.1 }}</p>
+        <p><strong>Telefones:</strong> {{ reg.2 }}</p>
+        <p><strong>Idade:</strong> {{ reg.3 }}</p>
+        <p><strong>Data de Nascimento:</strong> {{ reg.4|date:"d/m/Y" }}</p> {# Usando um filtro para formatar a data #}
+        <p><strong>Turma:</strong> {{ reg.6 }}</p> {# O reg.5 é o turma_id #}
+    </div>
     <br>
+
     <form action="{% url 'alunos_salvar' %}" method="post">
         {% csrf_token %}
         <input id="acao" name="acao" type="hidden" value="{{ acao }}">
-        
         <input type="hidden" id="id" name="id" value="{{reg.0}}">
 
-        <input class="btn-del" type="submit" value="Excluir">
-        
+        <input class="btn-del" type="submit" value="Confirmar Exclusão">
         <a class="btn-def" href="{% url 'alunos_listar' %}">Cancelar</a>
-
     </form>
     
 {# ================================================================= #}
-{# SE A AÇÃO FOR INCLUSÃO OU ALTERAÇÃO, MOSTRA O FORMULÁRIO COMPLETO #}
+{# SE A AÇÃO FOR INCLUSÃO/ALTERAÇÃO, MOSTRA O FORMULÁRIO (SEM MUDANÇAS) #}
 {# ================================================================= #}
 {% else %}
     <form action="{% url 'alunos_salvar' %}" method="post">
@@ -45,7 +51,6 @@
         <button class="btn" type="submit">Salvar</button>
         &nbsp;
         <a class="btn-def" href="{% url 'alunos_listar' %}">Cancelar</a>        
-
     </form>
 {% endif%}
 

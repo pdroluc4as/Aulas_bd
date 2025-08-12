@@ -1,47 +1,56 @@
 {% extends "base.html" %}
 
 {% block titulo_pagina %}
-    <h2 class="titulo_pagina">Departamentos</h2>
+    {# ================================================================ #}
+    {# CORREÇÃO: Título da página atualizado para "Listagem de Alunos". #}
+    {# ================================================================ #}
+    <h2 class="titulo_pagina">Listagem de Alunos</h2>
 {% endblock %}  
 
 {% block conteudo %}
 
     <div style="margin-left: 5px;">
-        <a class="btn medium" href="{% url 'alunos_editar' acao='incluir' id=0 %}">Incluir</a>
+        {# O link de "Incluir" já estava correto, apontando para a view de alunos #}
+        <a class="btn medium" href="{% url 'alunos_editar' acao='incluir' id=0 %}">Incluir Aluno</a>
     </div>
 
-    <!-- TABELA HTML COM OS REGISTROS -->
     <table>
-        <!-- CABECALHO DA TABELA HTML -->
         <thead>
             <tr>
+                {# ================================================================ #}
+                {# CORREÇÃO: Adicionadas todas as colunas da tabela de Alunos.    #}
+                {# ================================================================ #}
                 <th>ID</th>
                 <th>Nome</th>  
+                <th>Telefones</th>
                 <th>Idade</th>
+                <th>Data de Nascimento</th>
                 <th>Turma</th>
-
-                <!-- BOTOES DE ALTERAR E EXCLUIR -->
                 <th>Ações</th>
             </tr>
         </thead>
-        <!-- LINHAS DA TABELA HTML CONTENDO OS REGISTROS -->
+
         <tbody>
-            <!-- LOOP PARA PEGAR CADA REGISTRO -->
             {% for reg in registros %}
             <tr>
-                <td class="id">{{ reg.0 }}</td>
-                <td>{{ reg.nome }}</td>
-                <td>{{ reg.idade }}</td>
-                <td>{{ reg.turma }}</td>
+                {# ==================================================================== #}
+                {# CORREÇÃO: Exibindo os dados de cada aluno na ordem do seu SELECT.  #}
+                {# reg.0 = id, reg.1 = nome, reg.2 = telefones, etc.                  #}
+                {# ==================================================================== #}
+                <td>{{ reg.0 }}</td>
+                <td>{{ reg.1 }}</td>
+                <td>{{ reg.2 }}</td>
+                <td>{{ reg.3 }}</td>
+                <td>{{ reg.4|date:"d/m/Y" }}</td> {# Filtro para formatar a data #}
+                <td>{{ reg.6 }}</td> {# reg.5 é o turma_id, reg.6 é o nome da turma #}
+                
+                {# Os links de Ações (Alterar/Excluir) já estavam corretos #}
                 <td>
-                    <a class="btn small" href="{% url 'alunos_editar' acao='alterar' id=reg.id %}">Alterar</a>
-                    
-                    <a class="btn-del small" href="{% url 'alunos_editar' acao='excluir' id=reg.id %}">Excluir</a>
+                    <a class="btn small" href="{% url 'alunos_editar' acao='alterar' id=reg.0 %}">Alterar</a>
+                    <a class="btn-del small" href="{% url 'alunos_editar' acao='excluir' id=reg.0 %}">Excluir</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 {% endblock %}
-
-

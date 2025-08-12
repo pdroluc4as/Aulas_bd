@@ -9,6 +9,7 @@ from .util_views import *
 TEMPLATE_PREFIXO = 'alunos'
 
 # Comando SELECT geral para retornar os registros
+# (Não precisa de alteração aqui)
 SQL_SELECT_GERAL = """
     SELECT
         a.id,
@@ -38,16 +39,22 @@ SQL_EXCLUSAO = """
     WHERE id = {}
 """
 
-# Comando SQL para incluir um registro
+# ======================================================================== #
+# CORREÇÃO: Adicionados os campos "telefones" e "idade"
+# ======================================================================== #
 SQL_INCLUSAO = """ 
-    INSERT INTO Aluno(nome, data_nascimento, turma_id) 
-    VALUES('{}', '{}', {})
+    INSERT INTO Aluno(nome, telefones, idade, data_nascimento, turma_id) 
+    VALUES('{}', '{}', {}, '{}', {})
 """
 
-# Comando SQL para alterar um registro
+# ======================================================================== #
+# CORREÇÃO: Adicionados os campos "telefones" e "idade"
+# ======================================================================== #
 SQL_ALTERACAO = """
     UPDATE Aluno 
     SET nome = '{}',
+        telefones = '{}',
+        idade = {},
         data_nascimento = '{}', 
         turma_id = {} 
     WHERE id = {}
@@ -57,13 +64,16 @@ SQL_ALTERACAO = """
 class ViewCRUD (ViewGenericCRUD):
     
     def obter_campos_formulario(self):
+        # ======================================================================== #
+        # CORREÇÃO: Adicionados "telefones" e "idade" na ordem correta
+        # ======================================================================== #
         return [    
-            # OBS-1: INFORME OS CAMPOS NA ORDEM QUE APARECEM NO SQL DE INCLUSAO/ALTERACAO 
             'nome',
+            'telefones',
+            'idade',
             'data_nascimento',
             'turma_id',
-            # 0BS-2: DEIXAR O ID POR ULTIMO
-            'id',
+            'id', # ID sempre por último
         ]
         
 # Formulário utilizado para edicao dos registros (inclusao e alteracao)
@@ -72,8 +82,12 @@ class Formulario(forms.Form):
     id = forms.IntegerField(label='ID', 
         widget=forms.TextInput(attrs={'readonly': 'readonly'}), required=False)
     
-    # Campos do formulario
+    # ======================================================================== #
+    # CORREÇÃO: Adicionados os campos "telefones" e "idade" ao formulário
+    # ======================================================================== #
     nome = forms.CharField(label='Nome do Aluno', max_length=100, required=True)
+    telefones = forms.CharField(label='Telefones', max_length=20, required=False) # "required=False" para ser opcional
+    idade = forms.IntegerField(label='Idade', required=False) # "required=False" para ser opcional
     data_nascimento = forms.DateField(label='Data de Nascimento', required=True)        
     turma_id = forms.ChoiceField(label='Turma')
 
