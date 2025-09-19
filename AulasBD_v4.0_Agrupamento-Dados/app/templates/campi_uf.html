@@ -1,0 +1,27 @@
+{% extends "base.html" %} 
+{% load humanize %}
+
+{% block titulo_pagina %}
+    <h2>Campi por UF</h2>
+{% endblock %} 
+
+{% block conteudo %}
+
+
+    <div class="dashboard">
+
+        {% for uf, quantidade in dados_campi %}
+            <div class="card">
+                <h3>{{ uf }}</h3>
+                {# Usamos o filtro 'intcomma' para formatar o número, ex: 1234 -> 1,234 #}
+                <p>{{ quantidade|intcomma }}</p>
+            </div>
+        {% empty %}
+            <div class="card">
+                <p>Nenhum dado de campi por UF foi encontrado.</p>
+            </div>
+        {% endfor %}
+        
+    </div>
+
+{% endblock %}
