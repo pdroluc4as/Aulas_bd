@@ -193,7 +193,7 @@ def ranking_ofertas_por_uf(request):
                 rc.nome_curso AS "Curso",
                 rc.total_ofertas AS "Ofertas",
                 -- O CONCAT junta o texto. ROUND arredonda e CAST converte para inteiro.
-                CONCAT(ROUND(rc.media_enade, 3), ' [', CAST(rc.min_enade AS INT), '-', CAST(rc.max_enade AS INT), ']') AS "ENADE"
+                CONCAT(CAST(ROUND(rc.media_enade, 2) AS NUMERIC(10, 2)), ' [', CAST(rc.min_enade AS INT), '-', CAST(rc.max_enade AS INT), ']') AS "ENADE"
             FROM
                 RankingCursosPorUF AS rc
             WHERE
