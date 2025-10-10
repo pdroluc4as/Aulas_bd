@@ -22,12 +22,16 @@ def exerc_01(request):
 
         
         sql = '''
-            SELECT * FROM nome_da_view
+            SELECT 
+            * 
+            FROM view_ex_01 
+            ORDER BY uf
         '''
        
         cursor.execute(sql)
 
         dados_do_banco = cursor.fetchall()
+
 
         # define a pagina a ser carregada, adicionando os registros das tabelas 
         return render(request, template, 
@@ -51,12 +55,16 @@ def exerc_02(request):
 
         
         sql = '''
-            SELECT * FROM nome_da_view
+            SELECT 
+                *
+            FROM view_ex_02
+            ORDER BY -Ofertas;
         '''
        
         cursor.execute(sql)
 
         dados_do_banco = cursor.fetchall()
+
 
         # define a pagina a ser carregada, adicionando os registros das tabelas 
         return render(request, template, 
@@ -80,12 +88,18 @@ def exerc_03(request):
 
         
         sql = '''
-            SELECT * FROM nome_da_view
+            SELECT 
+            * 
+            FROM view_ex_03 
+            ORDER BY Area, Curso
+
         '''
        
         cursor.execute(sql)
 
         dados_do_banco = cursor.fetchall()
+
+        print(dados_do_banco)
 
         # define a pagina a ser carregada, adicionando os registros das tabelas 
         return render(request, template, 

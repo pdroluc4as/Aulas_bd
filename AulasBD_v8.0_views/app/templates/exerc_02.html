@@ -1,5 +1,5 @@
 {% extends "base.html" %} 
-
+{% load humanize %}
 
 {% block titulo_pagina %}
     <h2>Exercício-2</h2>
@@ -10,10 +10,21 @@
 <p>Retornar os nomes dos cursos que possuem >= 2000 ofertas,
 ordenados inversamente por quantidade de ofertas.</p>
 
-    <div class="dashboard">
-
-        
-        
-    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Curso</th>
+                <th>Ofertas</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cursos, ofertas in dados %}
+            <tr>
+                <td>{{ cursos }}</td>
+                <td>{{ ofertas|intcomma }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock %}

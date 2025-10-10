@@ -12,7 +12,20 @@ de Municípios. Ordenar pelo nome da UF.</p>
 
     <div class="dashboard">
 
-        
+        <table>
+            <thead>
+                <th>Nome da UF</th>
+            </thead>
+            <tbody>
+                {% for i in dados %}
+                    {% for uf in i %}
+                        <tr>
+                            <td>{{uf}}</td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
         
     </div>
 
