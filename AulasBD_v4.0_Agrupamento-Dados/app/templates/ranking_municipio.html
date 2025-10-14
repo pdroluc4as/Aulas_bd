@@ -18,7 +18,7 @@
         <tbody>
             {% for municipio, uf, quantidade in dados_ranking %}
             <tr>
-                <td class="col-posicao">#{{ forloop.counter }}</td>
+                <td class="col-posicao">#{{ forloop.counter }}&#176;</td>
                 <td>{{ municipio }} - {{ uf }}</td>
                 <td class="col-quantidade">{{ quantidade|intcomma }}</td>
             </tr>
